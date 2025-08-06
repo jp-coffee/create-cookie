@@ -122,6 +122,34 @@ const Page: React.FC = () => {
 export default Page;
 ```
 
+## 🔒 Security & Provenance
+
+This package is published with NPM package provenance, which provides supply chain security by cryptographically linking the published package to its source code and build process.
+
+### Verifying Package Provenance
+
+You can verify that this package was built from the source code in this repository:
+
+```bash
+# Install the package
+npm install create-cookie
+
+# Verify the provenance
+npm audit signatures
+
+# Or use the provided verification script
+npm run verify-provenance
+```
+
+### What This Provides
+
+- **Supply Chain Security**: Prevents malicious package injection
+- **Trust**: Verify package authenticity and origin
+- **Transparency**: Links packages to source code and build process
+- **Compliance**: Meets security requirements for many organizations
+
+For more information about NPM package provenance, see the [official documentation](https://docs.npmjs.com/generating-provenance-statements).
+
 ## 🛠 Contributing
 
 Contributions are welcome! To contribute:

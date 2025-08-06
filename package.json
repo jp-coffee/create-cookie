@@ -19,6 +19,17 @@
   "bugs": {
     "url": "https://github.com/jp-coffee/create-cookie/issues"
   },
+  "homepage": "https://github.com/jp-coffee/create-cookie#readme",
+  "keywords": [
+    "react",
+    "cookies",
+    "cookie-management",
+    "hooks",
+    "state-management",
+    "browser-storage",
+    "web-storage",
+    "react-hooks"
+  ],
   "files": [
     "dist"
   ],
@@ -35,7 +46,9 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "prebuild": "npm run clean",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit",
+    "verify-provenance": "./scripts/verify-provenance.sh"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",

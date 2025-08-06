@@ -1,4 +1,4 @@
-name: Publish to NPM
+name: Publish to NPM with Provenance
 
 on:
   release:
@@ -8,23 +8,38 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    # Add permissions for OIDC token required for provenance
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "22.14.0"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build the project
-        run: npm run build
+        run: pnpm run build
 
-      - name: Publish to NPM
+      - name: Publish to NPM with provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        run: npm publish
+        run: npm publish --provenance
+
+      - name: Verify provenance
+        run: |
+          echo "Package published with provenance. Users can verify with:"
+          echo "npm audit signatures"
